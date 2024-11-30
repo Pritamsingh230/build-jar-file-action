@@ -3,8 +3,6 @@ name: Build JAR with Maven
 on:
   push:
     branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "staging" ]
 
 jobs:
   build:
@@ -15,7 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # Step 2: Set up JDK 21
+    # Step 2: List directory contents to confirm pom.xml is present
+    - name: List directory contents
+      run: ls -R
+
+    # Step 3: Set up JDK 21
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
@@ -23,13 +25,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Step 3: Build with Maven (this will create the .jar file)
+    # Step 4: Build with Maven
     - name: Build with Maven
-      run: mvn clean package --file ./pom.xml  # Use the correct path to pom.xml
+      run: mvn clean package --file ./pom.xml  # Make sure the path to pom.xml is correct
 
     # Optional: Upload artifact if needed
     - name: Upload JAR artifact
       uses: actions/upload-artifact@v3
       with:
-        name: my-app-jar1
+        name: my-app-jar
         path: target/*.jar
