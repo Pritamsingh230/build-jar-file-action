@@ -28,5 +28,5 @@ jobs:
     - name: Upload JAR artifact
       uses: actions/upload-artifact@v3
       with:
-        name: my-app-jar
+        name: jar1-test2
         path: target/*.jar
