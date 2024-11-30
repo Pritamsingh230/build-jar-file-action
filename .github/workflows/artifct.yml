@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the repository
+    # Step 1: Checkout code
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -23,12 +23,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Step 3: Build the project with Maven (this will create the .jar file)
+    # Step 3: Build with Maven (this will create the .jar file)
     - name: Build with Maven
-      run: mvn clean package --file pom.xml
-    # Step 4: Upload JAR artifact
+      run: mvn clean package --file ./pom.xml  # Use the correct path to pom.xml
+
+    # Optional: Upload artifact if needed
     - name: Upload JAR artifact
       uses: actions/upload-artifact@v3
       with:
-        name: my-app-jar
+        name: my-app-jar1
         path: target/*.jar
